@@ -26,6 +26,12 @@ object List {
     case Cons(x, xs) => f(x, foldRight(xs, z)(f))
   }
 
+  @tailrec
+  def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B = as match {
+    case Nil => z
+    case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
+  }
+
   def sum2(ns: List[Int]): Int = foldRight(ns, 0)((x, y) => x + y)
   def product2(ns: List[Double]): Double = foldRight(ns, 1.0)(_ * _)
   def length[A](as: List[A]):Int = foldRight(as, 0)((_, y) => 1 + y)
