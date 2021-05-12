@@ -47,6 +47,8 @@ object List {
   def append[A](as: List[A], tg: List[A]): List[A] = foldRight(as, tg)((x, acc) => Cons(x, acc))
   // Cons(1, Nil) → Cons(1, Cons(2, Nil))
 
+  def addOne(as: List[Int]): List[Int] = foldRight(as, Nil:List[Int])((x, acc) => Cons(x + 1, acc))
+
   def tail[A](l: List[A]): List[A] = l match {
     case Nil => Nil
     case Cons(_, xs) => xs
