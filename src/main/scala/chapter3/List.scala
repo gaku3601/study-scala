@@ -40,6 +40,9 @@ object List {
   def product3(ns: List[Double]): Double = foldLeft(ns, 1.0)(_ * _)
   def length3[A](as: List[A]):Int = foldLeft(as, 0)((acc, _) => 1 + acc)
 
+  def reverse[A](as: List[A]): List[A] = foldLeft(as, List[A]())((acc, x) => Cons(x, acc))
+  // List(1,2,3) → List(3, 2, 1)
+  // Cons(xs, Cons(1, Nil)) → Cons(xs, Cons(2, Cons(1, Nil)))
 
   def tail[A](l: List[A]): List[A] = l match {
     case Nil => Nil
