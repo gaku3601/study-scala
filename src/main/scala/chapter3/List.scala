@@ -66,6 +66,12 @@ object List {
 
   def filter2[A](as : List[A])(f: A => Boolean): List[A] = flatMap(as)(x => if(f(x)) List(x) else Nil)
 
+  def add(as: List[Int], tg: List[Int]): List[Int] = (as,tg) match {
+    case (Nil, _) => Nil
+    case (_, Nil) => Nil
+    case (Cons(x,xs), Cons(y, ys)) => Cons(x + y, add(xs, ys))
+  }
+
   def setHead[A](head: A,l: List[A]): List[A] = l match {
     case Nil => Nil
     case Cons(_, xs) => Cons(head, xs)
