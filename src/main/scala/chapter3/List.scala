@@ -58,6 +58,8 @@ object List {
 
   def map[A,B](as: List[A])(f: A => B): List[B] = foldRight(as, Nil: List[B])((x, acc) => Cons(f(x), acc))
 
+  def filter[A](as: List[A])(f: A => Boolean): List[A] = foldRight(as, Nil: List[A])((x, acc) => if(f(x)) Cons(x, acc) else acc)
+
   def setHead[A](head: A,l: List[A]): List[A] = l match {
     case Nil => Nil
     case Cons(_, xs) => Cons(head, xs)
