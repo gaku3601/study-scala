@@ -1,6 +1,8 @@
 package com.gaku3601.studyscala
 package chapter3
 
+import org.omg.CORBA.Any
+
 import scala.annotation.tailrec
 
 sealed trait List[+A]
@@ -70,6 +72,12 @@ object List {
     case (Nil, _) => Nil
     case (_, Nil) => Nil
     case (Cons(x,xs), Cons(y, ys)) => Cons(x + y, add(xs, ys))
+  }
+
+  def zipWith[A,B,C](as: List[A], tg: List[B])(f: (A, B) => C): List[C] = (as,tg) match {
+    case (Nil, _) => Nil
+    case (_, Nil) => Nil
+    case (Cons(x,xs), Cons(y, ys)) => Cons(f(x, y), zipWith(xs, ys)(f))
   }
 
   def setHead[A](head: A,l: List[A]): List[A] = l match {
