@@ -56,6 +56,8 @@ object List {
 
   def toString(as: List[Double]):List[String] = foldRight(as, Nil: List[String])((x, acc) => Cons(x.toString, acc))
 
+  def map[A,B](as: List[A])(f: A => B): List[B] = foldRight(as, Nil: List[B])((x, acc) => Cons(f(x), acc))
+
   def setHead[A](head: A,l: List[A]): List[A] = l match {
     case Nil => Nil
     case Cons(_, xs) => Cons(head, xs)
