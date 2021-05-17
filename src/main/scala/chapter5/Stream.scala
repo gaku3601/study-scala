@@ -1,9 +1,21 @@
 package com.gaku3601.studyscala
 package chapter5
 
+import chapter5.Stream.empty
+
 trait Stream[+A] {
   def toList: List[A] = this match {
     case Cons(h, t) => h() :: t().toList
+  }
+  def take(n: Int): Stream[A] = this match {
+    case Cons(h, t) if n > 1 => Stream.cons(h(), t().take(n -1))
+    case Cons(h, _) if n == 1 => Stream.cons(h(), empty)
+    case _ => Empty
+  }
+
+  def drop(n: Int): Stream[A] = this match {
+    case Cons(_, t) if n > 0 => t().drop(n -1)
+    case _ => this
   }
 }
 case object Empty extends Stream[Nothing]
